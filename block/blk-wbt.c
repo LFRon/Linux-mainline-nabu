@@ -731,8 +731,14 @@ EXPORT_SYMBOL_GPL(wbt_enable_default);
 
 u64 wbt_default_latency_nsec(struct request_queue *q)
 {
-	/* XanMod defaults to 2msec for any type of storage */
-	return 2000000ULL;
+	/*
+	 * We default to 2msec for non-rotational storage, and 75msec
+	 * for rotational storage.
+	 */
+	if (blk_queue_nonrot(q))
+		return 2000000ULL;
+	else
+		return 75000000ULL;
 }
 
 static int wbt_data_dir(const struct request *rq)

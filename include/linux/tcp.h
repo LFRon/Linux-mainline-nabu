@@ -247,8 +247,7 @@ struct tcp_sock {
 	void (*tcp_clean_acked)(struct sock *sk, u32 acked_seq);
 #endif
 	u32	snd_ssthresh;	/* Slow start size threshold		*/
-	u32	recvmsg_inq : 1,/* Indicate # of bytes in queue upon recvmsg */
-		fast_ack_mode:1;/* ack ASAP if >1 rcv_mss received? */
+	u8	recvmsg_inq : 1;/* Indicate # of bytes in queue upon recvmsg */
 	__cacheline_group_end(tcp_sock_read_rx);
 
 	/* TX read-write hotpath cache lines */
@@ -305,8 +304,7 @@ struct tcp_sock {
  */
 	struct tcp_options_received rx_opt;
 	u8	nonagle     : 4,/* Disable Nagle algorithm?             */
-		rate_app_limited:1,  /* rate_{delivered,interval_us} limited? */
-		tlp_orig_data_app_limited:1; /* app-limited before TLP rtx? */
+		rate_app_limited:1;  /* rate_{delivered,interval_us} limited? */
 	__cacheline_group_end(tcp_sock_write_txrx);
 
 	/* RX read-write hotpath cache lines */

@@ -23,6 +23,7 @@ config BCACHEFS_FS
 	select XOR_BLOCKS
 	select XXHASH
 	select SRCU
+	select SYMBOLIC_ERRNAME
 	select MIN_HEAP
 	select XARRAY_MULTI
 	help
